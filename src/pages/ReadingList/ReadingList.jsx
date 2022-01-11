@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Details from "../../components/LogOut/Details";
+import Details from "../../components/Details/Details";
 
 export default function ReadingList({
   readingList,
