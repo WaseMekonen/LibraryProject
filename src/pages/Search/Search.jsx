@@ -10,16 +10,7 @@ export default function Search({
 }) {
   const [userSearchedInput, setUserSearchedInput] = useState("");
   const [searchResult, setSearchResult] = useState([]);
-  const [temporaryBooks, setTemporaryBooks] = useState(books);
 
-  // const options = {
-  //   method: "GET",
-  //   url: "https://bookshelves.p.rapidapi.com/books",
-  //   headers: {
-  //     "x-rapidapi-host": "bookshelves.p.rapidapi.com",
-  //     "x-rapidapi-key": "4e1eeaa98bmsh524186f937578fcp1af7c7jsn4d0f0e80c5ca",
-  //   },
-  // };
   const URL = "/data/books.json";
 
   useEffect(() => {
@@ -30,7 +21,6 @@ export default function Search({
     axios
       .get(URL)
       .then((response) => {
-        console.log(response);
         setBooks(response.data);
       })
       .catch((err) => {
@@ -50,11 +40,14 @@ export default function Search({
   };
 
   function filterdSearchedBooks() {
+    const temporaryBooks = books;
     temporaryBooks.forEach((element) => {
+      element.author1 = element.author;
       element.author = element.author.toLowerCase();
+      element.description1 = element.description;
       element.description = element.description.toLowerCase();
+      element.title1 = element.title;
       element.title = element.title.toLowerCase();
-      setBooks(temporaryBooks);
     });
     const filterByTitle = temporaryBooks.filter((book) =>
       book.title.includes(userSearchedInput)
@@ -93,10 +86,10 @@ export default function Search({
 
   const searchElements = searchResult.map((book) => (
     <div key={book.id}>
-      <h3>{book.title}</h3>
-      <h4>{book.author}</h4>
+      <h3>{book.title1}</h3>
+      <h4>{book.author1}</h4>
       <img src={book.imgUrl} />
-      <h5>{showShortDescription(book.description)}</h5>
+      <h5>{showShortDescription(book.description1)}</h5>
       <button
         onClick={() => {
           addBookToList(book.id, readingList, setReadingList);
@@ -116,6 +109,7 @@ export default function Search({
         onSubmit={(e) => {
           e.preventDefault();
           filterdSearchedBooks();
+          userInput = "";
         }}
       >
         <input

@@ -18,7 +18,6 @@ function App() {
   const userLocalStorage = JSON.stringify(auth ? auth.email : auth);
   localStorage.setItem("auth", userLocalStorage);
 
-  console.log(books);
 
   function showShortDescription(description) {
     const dotes = "...";
