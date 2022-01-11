@@ -109,7 +109,7 @@ export default function Search({
         onSubmit={(e) => {
           e.preventDefault();
           filterdSearchedBooks();
-          userInput = "";
+          e.target[0].value = "";
         }}
       >
         <input
