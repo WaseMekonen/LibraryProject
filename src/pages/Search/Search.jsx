@@ -1,43 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useState } from "react/cjs/react.development";
 
 export default function Search({
+  books,
   setBooks,
   showShortDescription,
-  books,
   readingList,
   setReadingList,
-  auth,
 }) {
   const [userSearchedInput, setUserSearchedInput] = useState("");
-  const [searchedBooks, setSearchedBooks] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
+  const [temporaryBooks, setTemporaryBooks] = useState(books);
 
-  const authEmail = auth.email;
-  const emailLocalStorage = JSON.stringify(authEmail);
-  localStorage.setItem("email", emailLocalStorage);
-
-  const options = {
-    method: "GET",
-    url: "https://bookshelves.p.rapidapi.com/books",
-    headers: {
-      "x-rapidapi-host": "bookshelves.p.rapidapi.com",
-      "x-rapidapi-key": "4e1eeaa98bmsh524186f937578fcp1af7c7jsn4d0f0e80c5ca",
-    },
-  };
+  // const options = {
+  //   method: "GET",
+  //   url: "https://bookshelves.p.rapidapi.com/books",
+  //   headers: {
+  //     "x-rapidapi-host": "bookshelves.p.rapidapi.com",
+  //     "x-rapidapi-key": "4e1eeaa98bmsh524186f937578fcp1af7c7jsn4d0f0e80c5ca",
+  //   },
+  // };
+  const URL = "/data/books.json";
 
   useEffect(() => {
     getBooks();
-  }, [options.url]);
+  }, [URL]);
 
   function getBooks() {
     axios
-      .request(options)
-      .then(function (response) {
-        setBooks(response.data.Books);
+      .get(URL)
+      .then((response) => {
+        console.log(response);
+        setBooks(response.data);
       })
-      .catch(function (error) {
-        console.error(error);
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -45,7 +42,7 @@ export default function Search({
     const newBookArray = array;
     const currentBook = books.find((book) => book.id == itemId);
     if (newBookArray.indexOf(currentBook) > -1) {
-      alert("book alerdy exist in the list");
+      alert("book is already exist");
     } else {
       newBookArray.push(currentBook);
       setArray(newBookArray);
@@ -53,53 +50,64 @@ export default function Search({
   };
 
   function filterdSearchedBooks() {
-    const titleArr = books.filter((book) =>
+    temporaryBooks.forEach((element) => {
+      element.author = element.author.toLowerCase();
+      element.description = element.description.toLowerCase();
+      element.title = element.title.toLowerCase();
+      setBooks(temporaryBooks);
+    });
+    const filterByTitle = temporaryBooks.filter((book) =>
       book.title.includes(userSearchedInput)
     );
-    const authorArr = books.filter((book) =>
+    const filterByAuthor = temporaryBooks.filter((book) =>
       book.author.includes(userSearchedInput)
     );
-    const descriptionArr = books.filter((book) =>
+    const filterByDescription = temporaryBooks.filter((book) =>
       book.description.includes(userSearchedInput)
     );
-
-    let concatedArr = titleArr.concat(authorArr).concat(descriptionArr);
+    let concatedArr = filterByTitle
+      .concat(filterByAuthor)
+      .concat(filterByDescription);
     let userSearchResult = [...new Set(concatedArr)];
     let shortDisplayResult = userSearchResult.splice(0, 10);
-    setSearchedBooks(shortDisplayResult);
+    setSearchResult(shortDisplayResult);
   }
 
-  const elements = books.map((book) => (
+  const elements = books
+    ? books.map((book) => (
+        <div key={book.id}>
+          <h3>{book.title}</h3>
+          <h4>{book.author}</h4>
+          <img src={book.imgUrl} />
+          <h5>{showShortDescription(book.description)}</h5>
+          <button
+            onClick={() => {
+              addBookToList(book.id, readingList, setReadingList);
+            }}
+          >
+            Add to Reading List
+          </button>
+        </div>
+      ))
+    : null;
+
+  const searchElements = searchResult.map((book) => (
     <div key={book.id}>
       <h3>{book.title}</h3>
       <h4>{book.author}</h4>
       <img src={book.imgUrl} />
       <h5>{showShortDescription(book.description)}</h5>
-
       <button
-        onClick={() => addBookToList(book.id, readingList, setReadingList)}
+        onClick={() => {
+          addBookToList(book.id, readingList, setReadingList);
+        }}
       >
         Add to Reading List
       </button>
     </div>
   ));
 
-  const searchingResult = searchedBooks.map((book) => (
-    <div key={book.id}>
-      <h3>{book.title}</h3>
-      <h4>{book.author}</h4>
-      <img src={book.imgUrl} />
-      <h5>{showShortDescription(book.description)}</h5>
-
-      <button
-        onClick={() => addBookToList(book.id, readingList, setReadingList)}
-      >
-        Add to Reading List
-      </button>
-    </div>
-  ));
-
-  const shortElement = elements.splice(0, 10);
+  const shortElement = elements ? elements.splice(0, 10) : null;
 
   return (
     <div>
@@ -113,14 +121,14 @@ export default function Search({
         <input
           type="text"
           placeholder="Search a book"
-          onChange={(e) => {
-            setUserSearchedInput(e.target.value);
+          onInput={(e) => {
+            let userInput = e.target.value;
+            setUserSearchedInput(userInput.toLowerCase());
           }}
         />
         <input type="submit" value="Search" />
       </form>
-      <div>{userSearchedInput ? searchingResult : shortElement}</div>
-      <div>{userSearchedInput ? "" : shortElement}</div>
+      <div>{userSearchedInput ? searchElements : shortElement}</div>
     </div>
   );
 }

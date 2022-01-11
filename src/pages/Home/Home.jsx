@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import StarRating from "../../components/StarRating/StarRating";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <button>
         <Link to="/Register"> Register </Link>
       </button>
+      
     </div>
   );
 }

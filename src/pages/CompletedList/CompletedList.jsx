@@ -1,18 +1,12 @@
-import React, { useState } from "react";
-import Details from "../../components/LogOut/Details";
-
 export default function CompletedList({
   completedList,
   setCompletedList,
   showShortDescription,
   auth,
 }) {
-  // const [show, setShow] = useState(false);
-  const [bookDetails, setBookDetails] = useState("");
+  // const userCompletedLocalStorage = JSON.stringify(completedList);
 
-  const userCompletedLocalStorage = JSON.stringify(completedList);
-
-  localStorage.setItem("completdList", userCompletedLocalStorage);
+  // localStorage.setItem("completdList", userCompletedLocalStorage);
 
   const removeBook = (id) => {
     const newCompletedArr = completedList.filter((book) => {
@@ -25,12 +19,7 @@ export default function CompletedList({
     <div key={book.id}>
       <h3>{book.title}</h3>
       <h4>{book.author}</h4>
-      <img
-        src={book.imgUrl}
-        onClick={() => {
-          setBookDetails(book);
-        }}
-      />
+      <img src={book.imgUrl} />
       <h5>{showShortDescription(book.description)}</h5>
       <button
         onClick={() => {
@@ -44,7 +33,6 @@ export default function CompletedList({
   return (
     <div>
       <h1>Completed list page</h1>
-      {bookDetails ? <Details item={bookDetails} /> : ""}
       <div>{completedElement}</div>
     </div>
   );

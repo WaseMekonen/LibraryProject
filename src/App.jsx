@@ -6,9 +6,8 @@ import Register from "./pages/Register/Register";
 import Search from "./pages/Search/Search";
 import ReadingList from "./pages/ReadingList/ReadingList";
 import CompletedList from "./pages/CompletedList/CompletedList";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
 import { useState } from "react";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const [auth, setAuth] = useState("");
@@ -17,16 +16,17 @@ function App() {
   const [completedList, setCompletedList] = useState([]);
 
   const userLocalStorage = JSON.stringify(auth ? auth.email : auth);
-
   localStorage.setItem("auth", userLocalStorage);
 
-
+  console.log(books);
 
   function showShortDescription(description) {
-    const readMore = <Link to="/Details">...</Link>
-    if (description.length > 200) {
-      let newWord = description.slice(0, 200) + `${readMore}`;
+    const dotes = "...";
+    if (description.length >= 200) {
+      let newWord = description.slice(0, 200) + " " + dotes;
       return newWord;
+    } else {
+      return description;
     }
   }
 

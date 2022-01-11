@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Details from "../../components/LogOut/Details";
 
 export default function ReadingList({
   readingList,
@@ -8,9 +9,9 @@ export default function ReadingList({
   showShortDescription,
   auth,
 }) {
-  const userReadingLocalStorage = JSON.stringify(readingList);
-  localStorage.setItem("readingList", userReadingLocalStorage);
-
+  const [bookDetails, setBookDetails] = useState("");
+  // const userReadingLocalStorage = JSON.stringify(readingList);
+  // localStorage.setItem("readingList", userReadingLocalStorage);
   const addToCompletedList = (itemId, array, setArray) => {
     const newBookArray = array;
     const currentBook = readingList.find((book) => book.id == itemId);
@@ -30,13 +31,13 @@ export default function ReadingList({
     <div key={book.id}>
       <h3>{book.title}</h3>
       <h4>{book.author}</h4>
-      <img src={book.imgUrl} />
+      <img
+        src={book.imgUrl}
+        onClick={() => {
+          setBookDetails(book);
+        }}
+      />
       <h5>{showShortDescription(book.description)}</h5>
-      <textarea
-        cols="30"
-        rows="10"
-        placeholder="type here your notes"
-      ></textarea>
       <button
         onClick={() => {
           removeBook(book.id);
@@ -58,7 +59,15 @@ export default function ReadingList({
   return (
     <div>
       <h1>Reading list page</h1>
-
+      {bookDetails ? (
+        <Details
+          item={bookDetails}
+          setBookDetails={setBookDetails}
+          showShortDescription={showShortDescription}
+        />
+      ) : (
+        ""
+      )}
       <div>{readingElement}</div>
     </div>
   );
