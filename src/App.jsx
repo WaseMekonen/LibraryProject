@@ -18,7 +18,6 @@ function App() {
   const userLocalStorage = JSON.stringify(auth ? auth.email : auth);
   localStorage.setItem("auth", userLocalStorage);
 
-
   function showShortDescription(description) {
     const dotes = "...";
     if (description.length >= 200) {
@@ -32,27 +31,27 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {!auth ? (
-          <>
-            <Link to="/">Home</Link>
-            <Link to="/Login">Login</Link> <Link to="/Register">Register</Link>
-          </>
-        ) : (
-          <Redirect to="/Search" />
-        )}
         {auth ? (
           <>
-            <Link to="/Search">Search</Link>
-            <span> </span>
-            <Link to="/ReadingList">Reading List</Link>
-            <span> </span>
-            <Link to="/CompletedList">Completed List</Link>
+            <ul>
+              <li>
+                <Link to="/Search">Search</Link>
+              </li>
+              <li>
+                <Link to="/ReadingList">Reading List</Link>
+              </li>
+              <li>
+                <Link to="/CompletedList">Completed List</Link>
+              </li>
+              <li>
+                <LogOut setAuth={setAuth} auth={auth} />
+                <Redirect to="/Search" />
+              </li>
+            </ul>
           </>
         ) : (
           <Redirect to="/" />
         )}
-
-        {auth ? <LogOut setAuth={setAuth} /> : <Redirect to="/" />}
 
         <Switch>
           <Route exact path="/" render={() => <Home />}></Route>

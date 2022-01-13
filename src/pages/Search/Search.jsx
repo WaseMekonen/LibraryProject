@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./Search.css";
 
 export default function Search({
   books,
@@ -85,7 +86,7 @@ export default function Search({
     : null;
 
   const searchElements = searchResult.map((book) => (
-    <div key={book.id}>
+    <div key={book.id} >
       <h3>{book.title1}</h3>
       <h4>{book.author1}</h4>
       <img src={book.imgUrl} />
@@ -122,7 +123,7 @@ export default function Search({
         />
         <input type="submit" value="Search" />
       </form>
-      <div>{userSearchedInput ? searchElements : shortElement}</div>
+      <div className="search-container">{userSearchedInput ? searchElements : shortElement}</div>
     </div>
   );
 }

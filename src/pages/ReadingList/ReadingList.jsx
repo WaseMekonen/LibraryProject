@@ -8,10 +8,10 @@ export default function ReadingList({
   completedList,
   showShortDescription,
   auth,
-}) {
-  const [bookDetails, setBookDetails] = useState("");
-  // const userReadingLocalStorage = JSON.stringify(readingList);
+}) { // const userReadingLocalStorage = JSON.stringify(readingList);
   // localStorage.setItem("readingList", userReadingLocalStorage);
+  const [bookDetails, setBookDetails] = useState("");
+ 
   const addToCompletedList = (itemId, array, setArray) => {
     const newBookArray = array;
     const currentBook = readingList.find((book) => book.id == itemId);

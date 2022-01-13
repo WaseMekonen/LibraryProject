@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { API_KEY } from "../../logic";
 
-export default function Register({setAuth}) {
+export default function Register({ setAuth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState("");
@@ -28,10 +28,9 @@ export default function Register({setAuth}) {
   function isValidPassword() {
     if (validPassword == password) {
       signUp();
-      
     } else {
       setWrongPass(true);
-      alert("password doesn't match!")
+      alert("password doesn't match!");
     }
   }
 
