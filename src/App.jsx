@@ -37,7 +37,7 @@ function App() {
           <>
             <ul>
               <li>
-                <Link to="/Search">Search</Link>
+                <Link to="/Search">Library</Link>
               </li>
               <li>
                 <Link to="/ReadingList">Reading List</Link>

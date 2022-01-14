@@ -1,3 +1,11 @@
+.banner ul {
+  background-color: #292828c9;
+  margin-top: -149px;
+  margin-bottom: 45px;
+  height: 45px;
+  width: 100vw;
+}
+
 .banner {
   display: flex;
   width: 100vw;

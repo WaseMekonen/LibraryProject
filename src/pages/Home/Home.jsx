@@ -4,6 +4,7 @@ export default function Home() {
   return (
     <>
       <div className="banner">
+      <ul></ul>
         <div className="home-titles">
           <h2>Welcome </h2>
           <h4>Login To Discover The Secret Of Library</h4>
