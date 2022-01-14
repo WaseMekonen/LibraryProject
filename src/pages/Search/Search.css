@@ -8,8 +8,8 @@
   display: flex;
   justify-content: space-between;
   border-bottom-right-radius: 12px;
-  border-bottom: 2px solid #717171;
-  border-right: 2px solid gray;
+  box-shadow: 3px 5px 11px grey;
+  border: 1px solid gray;
 }
 
 .book-image {
@@ -56,6 +56,10 @@
   justify-content: flex-end;
   margin-bottom: 23px;
   margin-right: 12px;
+}
+
+.book-button button {
+  cursor: pointer;
 }
 
 .search-form {

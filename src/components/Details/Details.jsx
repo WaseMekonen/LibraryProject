@@ -1,45 +1,59 @@
 import React, { useState } from "react";
-// import StarRating from "../StarRating/StarRating";
+import "./Details.css";
 
 export default function Details({ item }) {
   const [userNotes, setUserNotes] = useState([]);
   const [note, setNote] = useState([]);
 
-  function saveUserNote(note) {
-    const notesElement = [...userNotes];
-    notesElement.push(note);
+  function saveUserNote(note, itemId) {
+    let newNote = {
+      id: itemId,
+      content: note,
+    };
+    const notesElement = [newNote,...userNotes];
     setUserNotes(notesElement);
     console.log(notesElement);
   }
 
+  const newNotes= userNotes.filter((note) => {
+    return note.id == item.id;
+    }  )
+
   return (
-    <div>
-      <h3>{item.title}</h3>
-      <h4>{item.author}</h4>
-      <br />
-      <img src={item.imgUrl} />
-      <h5>{item.description}</h5>
-      {userNotes.map((note, i) => {
-        return <p key={i}>{note}</p>;
-      })}
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          saveUserNote(note);
-        }}
-      >
-        <textarea
-          name=""
-          id=""
-          cols="50"
-          rows="6"
-          onInput={(e) => {
-            setNote(e.target.value);
+    <div className="details-container">
+      <div className="details-top">
+        <div className="details-image">
+          <img src={item.imgUrl} />
+        </div>
+        <div className="details-titles">
+          <h3>{item.title}</h3>
+          <h4>{item.author}</h4>
+          <h5>{item.description}</h5>
+        </div>
+        <div className="user-notes">
+          {newNotes.map((note, i) => {
+            return <p key={i}>{note.content}</p>;
+          })}
+         
+        </div>
+      </div>
+      <div className="details-bottom">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            saveUserNote(note, item.id);
           }}
-        ></textarea>
-        <br />
-        <input type="submit" value="save note" />
-      </form>
+        >
+          <textarea
+            cols="50"
+            rows="6"
+            onInput={(e) => {
+              setNote(e.target.value);
+            }}
+          ></textarea>
+          <input type="submit" value="save note" />
+        </form>
+      </div>
     </div>
   );
 }

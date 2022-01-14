@@ -8,10 +8,11 @@ export default function ReadingList({
   completedList,
   showShortDescription,
   auth,
-}) { // const userReadingLocalStorage = JSON.stringify(readingList);
+}) {
+  // const userReadingLocalStorage = JSON.stringify(readingList);
   // localStorage.setItem("readingList", userReadingLocalStorage);
   const [bookDetails, setBookDetails] = useState("");
- 
+
   const addToCompletedList = (itemId, array, setArray) => {
     const newBookArray = array;
     const currentBook = readingList.find((book) => book.id == itemId);
@@ -27,35 +28,81 @@ export default function ReadingList({
     setReadingList(newReadingArr);
   };
 
+  // const readingElement = readingList.map((book) => (
+  //   <div key={book.id}>
+  //     <h3>{book.title}</h3>
+  //     <h4>{book.author}</h4>
+  //     <img
+  //       src={book.imgUrl}
+  //       onClick={() => {
+  //         setBookDetails(book);
+  //       }}
+  //     />
+  //     <h5>{showShortDescription(book.description)}</h5>
+  //     <button
+  //       onClick={() => {
+  //         removeBook(book.id);
+  //       }}
+  //     >
+  //       Remove From List
+  //     </button>
+
+  //     <button
+  //       onClick={() => {
+  //         addToCompletedList(book.id, completedList, setCompletedList);
+  //         removeBook(book.id);
+  //       }}
+  //     >
+  //       Mark as read
+  //     </button>
+  //   </div>
+  // ));
+
   const readingElement = readingList.map((book) => (
-    <div key={book.id}>
-      <h3>{book.title}</h3>
-      <h4>{book.author}</h4>
-      <img
-        src={book.imgUrl}
-        onClick={() => {
-          setBookDetails(book);
-        }}
-      />
-      <h5>{showShortDescription(book.description)}</h5>
-      <button
-        onClick={() => {
-          removeBook(book.id);
-        }}
-      >
-        Remove From List
-      </button>
-      <span> </span>
-      <button
-        onClick={() => {
-          addToCompletedList(book.id, completedList, setCompletedList);
-          removeBook(book.id);
-        }}
-      >
-        Mark as read
-      </button>
+    <div className="book-container" key={book.id}>
+      <div className="book-image">
+        <img
+          src={book.imgUrl}
+          onClick={() => {
+            setBookDetails(book);
+          }}
+        />
+      </div>
+      <div className="book-details">
+        <div className="book-names">
+          <div className="book-title">
+            <h3>{book.title}</h3>
+          </div>
+          <div className="book-author">
+            <h4>{book.author}</h4>
+          </div>
+        </div>
+        <div className="book-description">
+          <div>
+            <h5>{showShortDescription(book.description)}</h5>
+          </div>
+        </div>
+      </div>
+      <div className="book-button">
+        <button
+          onClick={() => {
+            removeBook(book.id);
+          }}
+        >
+          Remove From List
+        </button>
+        <button
+          onClick={() => {
+            addToCompletedList(book.id, completedList, setCompletedList);
+            removeBook(book.id);
+          }}
+        >
+          Mark as read
+        </button>
+      </div>
     </div>
   ));
+
   return (
     <div>
       <h1>Reading list page</h1>

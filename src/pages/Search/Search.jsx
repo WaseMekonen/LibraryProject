@@ -138,7 +138,8 @@ export default function Search({
   return (
     <div>
       <h2>Library</h2>
-      <form className="search-form"
+      <form
+        className="search-form"
         onSubmit={(e) => {
           e.preventDefault();
           filterdSearchedBooks();
