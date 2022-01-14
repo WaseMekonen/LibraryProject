@@ -1,13 +1,15 @@
+* {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+}
+
 .App {
   text-align: center;
-  height: 100vh;
+  height: auto;
   width: 100vw;
-  background: linear-gradient(
-    90deg,
-    rgba(175, 175, 175, 1) 15%,
-    rgba(208, 208, 208, 1) 57%,
-    rgba(215, 215, 215, 1) 93%
-  );
 }
 
 .App ul {

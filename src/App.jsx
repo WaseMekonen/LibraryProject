@@ -23,6 +23,8 @@ function App() {
     if (description.length >= 200) {
       let newWord = description.slice(0, 200) + " " + dotes;
       return newWord;
+    } else if (description.length == " ") {
+      return <p>Details is missing</p>;
     } else {
       return description;
     }

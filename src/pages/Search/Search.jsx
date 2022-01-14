@@ -69,35 +69,67 @@ export default function Search({
 
   const elements = books
     ? books.map((book) => (
-        <div key={book.id}>
-          <h3>{book.title}</h3>
-          <h4>{book.author}</h4>
-          <img src={book.imgUrl} />
-          <h5>{showShortDescription(book.description)}</h5>
-          <button
-            onClick={() => {
-              addBookToList(book.id, readingList, setReadingList);
-            }}
-          >
-            Add to Reading List
-          </button>
+        <div className="book-container" key={book.id}>
+          <div className="book-image">
+            <img src={book.imgUrl} />
+          </div>
+          <div className="book-details">
+            <div className="book-names">
+              <div className="book-title">
+                <h3>{book.title}</h3>
+              </div>
+              <div className="book-author">
+                <h4>{book.author}</h4>
+              </div>
+            </div>
+            <div className="book-description">
+              <div>
+                <h5>{showShortDescription(book.description)}</h5>
+              </div>
+            </div>
+          </div>
+          <div className="book-button">
+            <button
+              onClick={() => {
+                addBookToList(book.id, readingList, setReadingList);
+              }}
+            >
+              Add to Reading List
+            </button>
+          </div>
         </div>
       ))
     : null;
 
   const searchElements = searchResult.map((book) => (
-    <div key={book.id} >
-      <h3>{book.title1}</h3>
-      <h4>{book.author1}</h4>
-      <img src={book.imgUrl} />
-      <h5>{showShortDescription(book.description1)}</h5>
-      <button
-        onClick={() => {
-          addBookToList(book.id, readingList, setReadingList);
-        }}
-      >
-        Add to Reading List
-      </button>
+    <div className="book-container" key={book.id}>
+      <div className="book-image">
+        <img src={book.imgUrl} />
+      </div>
+      <div className="book-details">
+        <div className="book-names">
+          <div className="book-title">
+            <h3>{book.title}</h3>
+          </div>
+          <div className="book-author">
+            <h4>{book.author}</h4>
+          </div>
+        </div>
+        <div className="book-description">
+          <div>
+            <h5>{showShortDescription(book.description)}</h5>
+          </div>
+        </div>
+      </div>
+      <div className="book-button">
+        <button
+          onClick={() => {
+            addBookToList(book.id, readingList, setReadingList);
+          }}
+        >
+          Add to Reading List
+        </button>
+      </div>
     </div>
   ));
 
@@ -105,8 +137,8 @@ export default function Search({
 
   return (
     <div>
-      <h2>Search page</h2>
-      <form
+      <h2>Library</h2>
+      <form className="search-form"
         onSubmit={(e) => {
           e.preventDefault();
           filterdSearchedBooks();
@@ -123,7 +155,9 @@ export default function Search({
         />
         <input type="submit" value="Search" />
       </form>
-      <div className="search-container">{userSearchedInput ? searchElements : shortElement}</div>
+      <div className="search-container">
+        {userSearchedInput ? searchElements : shortElement}
+      </div>
     </div>
   );
 }
