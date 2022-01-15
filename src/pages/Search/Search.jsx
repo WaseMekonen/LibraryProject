@@ -15,7 +15,7 @@ export default function Search({
 
   const addBookToList = (itemId, array, setArray) => {
     const currentBook = books.find((book) => book.id == itemId);
-    if (array.indexOf(currentBook) > -1) {
+    if (array.filter(book=>currentBook.id == book.id).length > 0) {
       alert("book is already exist");
     } else {
       const newReadingList=[currentBook,...array]

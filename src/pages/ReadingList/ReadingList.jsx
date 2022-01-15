@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Details from "../../components/Details/Details";
+import ReactStars from "react-rating-stars-component";
 
 export default function ReadingList({
   readingList,
@@ -8,6 +9,21 @@ export default function ReadingList({
   completedList,
   showShortDescription,
 }) {
+  // Star rating:
+  const ratingChanged = (bookId, newRating) => {
+    // console.log("bookId", bookId);
+    // console.log("newRating", newRating);
+    const readingListCopy = [...readingList];
+    readingListCopy.forEach((book) => {
+      if (book.id === bookId) {
+        book.rating = newRating;
+      }
+    });
+    setReadingList(readingListCopy);
+    console.log('readingListUpdated',readingListCopy)
+    localStorage.setItem("readingList", JSON.stringify(readingListCopy));
+  };
+
   const [bookDetails, setBookDetails] = useState("");
 
   const addToCompletedList = (itemId, array, setArray) => {
@@ -41,6 +57,15 @@ export default function ReadingList({
           </div>
           <div className="book-author">
             <h4>{book.author}</h4>
+          </div>
+          <div className="rating">
+            <ReactStars
+              count={5}
+              value={book.rating || 0}
+              onChange={ratingChanged.bind(this, book.id)}
+              size={24}
+              activeColor="#ffd700"
+            />
           </div>
         </div>
         <div className="book-description">
