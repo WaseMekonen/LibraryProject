@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./Details.css";
 
 export default function Details({ item }) {
+  const [tempNote, setTempNote] = useState("");
   const [userNotes, setUserNotes] = useState([]);
-  const [note, setNote] = useState([]);
 
-  function saveUserNote(note, itemId) {
+  function saveUserNote(tempNote, itemId) {
     let newNote = {
       id: itemId,
-      content: note,
+      content: tempNote,
     };
-    const notesElement = [newNote,...userNotes];
-    setUserNotes(notesElement);
-    console.log(notesElement);
+
+    const updatedNotes = userNotes;
+    updatedNotes.push(newNote);
+    setUserNotes(updatedNotes);
+    // localStorage.setItem("notes", JSON.stringify(notesElement));
   }
 
-  const newNotes= userNotes.filter((note) => {
+  const filteredNoteByBookId = userNotes.filter((note) => {
     return note.id == item.id;
-    }  )
+  });
+  
+
+  const elements = filteredNoteByBookId.map((note, i) => {
+    return <p key={i}>{note.content}</p>;
+  });
 
   return (
     <div className="details-container">
@@ -29,26 +36,22 @@ export default function Details({ item }) {
           <h3>{item.title}</h3>
           <h4>{item.author}</h4>
           <h5>{item.description}</h5>
+          {/* <h3>{(item.note = tempNote)}</h3> */}
         </div>
-        <div className="user-notes">
-          {newNotes.map((note, i) => {
-            return <p key={i}>{note.content}</p>;
-          })}
-         
-        </div>
+        <div className="user-notes">{elements}</div>
       </div>
       <div className="details-bottom">
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            saveUserNote(note, item.id);
+            saveUserNote(tempNote, item.id);
           }}
         >
           <textarea
             cols="50"
             rows="6"
             onInput={(e) => {
-              setNote(e.target.value);
+              setTempNote(e.target.value);
             }}
           ></textarea>
           <input type="submit" value="save note" />

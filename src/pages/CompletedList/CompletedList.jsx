@@ -1,3 +1,5 @@
+import "./CompletedList.css";
+
 export default function CompletedList({
   completedList,
   setCompletedList,
@@ -16,20 +18,28 @@ export default function CompletedList({
   };
 
   const completedElement = completedList.map((book) => (
-    <div key={book.id}>
-      <h3>{book.title}</h3>
-      <h4>{book.author}</h4>
-      <img src={book.imgUrl} />
-      <h5>{showShortDescription(book.description)}</h5>
-      <button
-        onClick={() => {
-          removeBook(book.id);
-        }}
-      >
-        Remove
-      </button>
+    <div key={book.id} className="completed-container">
+      <div className="completed-img">
+        <img src={book.imgUrl} />
+      </div>
+      <div className="completed-titles">
+        <div>
+          <h3>{book.title}</h3>
+          <h4>{book.author}</h4>
+        </div>
+      </div>
+      <div className="completed-btn">
+        <button
+          onClick={() => {
+            removeBook(book.id);
+          }}
+        >
+          Remove
+        </button>
+      </div>
     </div>
   ));
+
   return (
     <div>
       <h1>Completed list page</h1>

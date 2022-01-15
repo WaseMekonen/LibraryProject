@@ -9,8 +9,6 @@ export default function ReadingList({
   showShortDescription,
   auth,
 }) {
-  // const userReadingLocalStorage = JSON.stringify(readingList);
-  // localStorage.setItem("readingList", userReadingLocalStorage);
   const [bookDetails, setBookDetails] = useState("");
 
   const addToCompletedList = (itemId, array, setArray) => {
@@ -18,7 +16,6 @@ export default function ReadingList({
     const currentBook = readingList.find((book) => book.id == itemId);
     newBookArray.push(currentBook);
     setArray(newBookArray);
-    // newBookArray.splice(currentBook, 1);
   };
 
   const removeBook = (id) => {
@@ -27,36 +24,6 @@ export default function ReadingList({
     });
     setReadingList(newReadingArr);
   };
-
-  // const readingElement = readingList.map((book) => (
-  //   <div key={book.id}>
-  //     <h3>{book.title}</h3>
-  //     <h4>{book.author}</h4>
-  //     <img
-  //       src={book.imgUrl}
-  //       onClick={() => {
-  //         setBookDetails(book);
-  //       }}
-  //     />
-  //     <h5>{showShortDescription(book.description)}</h5>
-  //     <button
-  //       onClick={() => {
-  //         removeBook(book.id);
-  //       }}
-  //     >
-  //       Remove From List
-  //     </button>
-
-  //     <button
-  //       onClick={() => {
-  //         addToCompletedList(book.id, completedList, setCompletedList);
-  //         removeBook(book.id);
-  //       }}
-  //     >
-  //       Mark as read
-  //     </button>
-  //   </div>
-  // ));
 
   const readingElement = readingList.map((book) => (
     <div className="book-container" key={book.id}>

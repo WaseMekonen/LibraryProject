@@ -10,7 +10,7 @@
   display: flex;
   width: 100vw;
   height: 300px;
-  background: url(https://cdn.pixabay.com/photo/2020/07/24/09/49/books-5433432_960_720.jpg);
+  background: url(https://cdn.pixabay.com/photo/2021/08/07/14/36/modern-6528732_960_720.png);
   background-repeat: no-repeat;
   border: none;
   background-size: cover;
@@ -19,6 +19,7 @@
   justify-content: center;
   flex-direction: column;
   margin-bottom: 63px;
+  box-shadow: 0px 5px 10px grey;
 }
 
 .home-titles h2 {
@@ -45,6 +46,25 @@
   border-radius: 10px;
   background-color: #0093e9;
   background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+  cursor: pointer;
+  border-bottom: 2px solid #504f4f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-link:hover {
+  text-align: center;
+  width: 13%;
+  height: 44px;
+  border-radius: 10px;
+  background: rgb(255, 166, 0);
+  background: linear-gradient(
+    42deg,
+    rgba(255, 166, 0, 1) 15%,
+    rgba(255, 128, 70, 1) 59%,
+    rgba(255, 220, 105, 1) 100%
+  );
   cursor: pointer;
   border-bottom: 2px solid #504f4f;
   display: flex;

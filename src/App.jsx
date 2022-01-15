@@ -7,7 +7,9 @@ import Search from "./pages/Search/Search";
 import ReadingList from "./pages/ReadingList/ReadingList";
 import CompletedList from "./pages/CompletedList/CompletedList";
 import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Details from "./components/Details/Details";
 
 function App() {
   const [auth, setAuth] = useState("");
@@ -15,7 +17,24 @@ function App() {
   const [readingList, setReadingList] = useState([]);
   const [completedList, setCompletedList] = useState([]);
 
-  const userLocalStorage = JSON.stringify(auth ? auth.email : auth);
+  const URL = "/data/books.json";
+
+  useEffect(() => {
+    getBooks();
+  }, [URL]);
+
+  function getBooks() {
+    axios
+      .get(URL)
+      .then((response) => {
+        setBooks(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  const userLocalStorage = JSON.stringify(auth ? auth.email : null);
   localStorage.setItem("auth", userLocalStorage);
 
   function showShortDescription(description) {
@@ -111,6 +130,7 @@ function App() {
               />
             )}
           ></Route>
+          <Route exact path="/Details" render={() => <Details />}></Route>
         </Switch>
       </div>
     </BrowserRouter>

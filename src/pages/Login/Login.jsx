@@ -4,7 +4,7 @@ import React from "react";
 import { useState } from "react";
 import { API_KEY } from "../../logic";
 
-export default function Login({ setAuth }) {
+export default function Login({ setAuth, setUserNotes }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,6 +13,7 @@ export default function Login({ setAuth }) {
     JSON.parse(localStorage.getItem("completdList"));
     JSON.parse(localStorage.getItem("readingList"));
   }
+
 
   function signIn() {
     const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./Search.css";
+import { useState } from "react";
 
 export default function Search({
   books,
@@ -12,31 +11,15 @@ export default function Search({
   const [userSearchedInput, setUserSearchedInput] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
-  const URL = "/data/books.json";
-
-  useEffect(() => {
-    getBooks();
-  }, [URL]);
-
-  function getBooks() {
-    axios
-      .get(URL)
-      .then((response) => {
-        setBooks(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+ 
 
   const addBookToList = (itemId, array, setArray) => {
-    const newBookArray = array;
     const currentBook = books.find((book) => book.id == itemId);
-    if (newBookArray.indexOf(currentBook) > -1) {
+    if (array.indexOf(currentBook) > -1) {
       alert("book is already exist");
     } else {
-      newBookArray.push(currentBook);
-      setArray(newBookArray);
+      const newReadingList=[currentBook,...array]
+      setArray(newReadingList);
     }
   };
 
@@ -67,8 +50,7 @@ export default function Search({
     setSearchResult(shortDisplayResult);
   }
 
-  const elements = books
-    ? books.map((book) => (
+  const elements = books.map((book) => (
         <div className="book-container" key={book.id}>
           <div className="book-image">
             <img src={book.imgUrl} />
@@ -99,7 +81,7 @@ export default function Search({
           </div>
         </div>
       ))
-    : null;
+    // : null;
 
   const searchElements = searchResult.map((book) => (
     <div className="book-container" key={book.id}>
