@@ -1,9 +1,18 @@
 import { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import "./Details.css";
 
 export default function Details({ item }) {
   const [tempNote, setTempNote] = useState("");
-  const [userNotes, setUserNotes] = useState([]);
+  const [userNotes, setUserNotes] = useState(
+    localStorage.getItem("notes")
+      ? JSON.parse(localStorage.getItem("notes"))
+      : []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(userNotes));
+  }, [userNotes.length]);
 
   function saveUserNote(tempNote, itemId) {
     let newNote = {
@@ -11,16 +20,13 @@ export default function Details({ item }) {
       content: tempNote,
     };
 
-    const updatedNotes = userNotes;
-    updatedNotes.push(newNote);
+    const updatedNotes = [...userNotes, newNote];
     setUserNotes(updatedNotes);
-    // localStorage.setItem("notes", JSON.stringify(notesElement));
   }
 
   const filteredNoteByBookId = userNotes.filter((note) => {
     return note.id == item.id;
   });
-  
 
   const elements = filteredNoteByBookId.map((note, i) => {
     return <p key={i}>{note.content}</p>;

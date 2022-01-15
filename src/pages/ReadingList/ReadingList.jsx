@@ -7,7 +7,6 @@ export default function ReadingList({
   setCompletedList,
   completedList,
   showShortDescription,
-  auth,
 }) {
   const [bookDetails, setBookDetails] = useState("");
 

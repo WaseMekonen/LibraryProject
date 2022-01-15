@@ -12,16 +12,40 @@ import axios from "axios";
 import Details from "./components/Details/Details";
 
 function App() {
-  const [auth, setAuth] = useState("");
+  const [auth, setAuth] = useState(
+    localStorage.getItem("auth")
+      ? JSON.parse(localStorage.getItem("auth"))
+      : null
+  );
   const [books, setBooks] = useState([]);
-  const [readingList, setReadingList] = useState([]);
-  const [completedList, setCompletedList] = useState([]);
+  const [readingList, setReadingList] = useState(
+    localStorage.getItem("readingList")
+      ? JSON.parse(localStorage.getItem("readingList"))
+      : []
+  );
+  const [completedList, setCompletedList] = useState(
+    localStorage.getItem("completedList")
+      ? JSON.parse(localStorage.getItem("completedList"))
+      : []
+  );
 
   const URL = "/data/books.json";
 
   useEffect(() => {
+    localStorage.setItem("auth", JSON.stringify(auth));
+  }, [auth]);
+
+  useEffect(() => {
     getBooks();
   }, [URL]);
+
+  useEffect(() => {
+    localStorage.setItem("readingList", JSON.stringify(readingList));
+  }, [readingList.length]);
+
+  useEffect(() => {
+    localStorage.setItem("completedList", JSON.stringify(completedList));
+  }, [completedList.length]);
 
   function getBooks() {
     axios
@@ -33,9 +57,6 @@ function App() {
         console.log(err);
       });
   }
-
-  const userLocalStorage = JSON.stringify(auth ? auth.email : null);
-  localStorage.setItem("auth", userLocalStorage);
 
   function showShortDescription(description) {
     const dotes = "...";
@@ -52,7 +73,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {auth ? (
+        {auth?.idToken ? (
           <>
             <ul>
               <li>
