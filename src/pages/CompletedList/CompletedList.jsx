@@ -16,8 +16,8 @@ export default function CompletedList({ completedList, setCompletedList }) {
       </div>
       <div className="completed-titles">
         <div>
-          <h3>{book.title}</h3>
-          <h4>{book.author}</h4>
+          <h4>{book.title}</h4>
+          <p>{book.author}</p>
         </div>
       </div>
       <div className="completed-btn">
