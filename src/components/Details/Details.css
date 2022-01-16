@@ -1,7 +1,7 @@
 .details-container {
   display: flex;
   flex-direction: column;
-  background-color: #18bdbd;
+  background-color: #fdfdfd;
   height: 319px;
   width: 88vw;
   border: 1px solid gray;
@@ -11,8 +11,8 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: 65%;
-  background-color: #5dbebe;
+  height: 100%;
+  background-color: #ffffff;
 }
 
 .details-image img {
@@ -27,6 +27,7 @@
   flex-direction: column;
   margin-left: 17px;
   align-items: flex-start;
+  justify-content: space-evenly;
 }
 
 .details-titles h3 {
@@ -39,32 +40,42 @@
   text-align: left;
   width: 80%;
 }
-.details-titles h5 {
+.details-titles p {
   margin-top: 17px px;
-  width: 80%;
-  height: 72%;
+  width: 98%;
+  height: 50%;
   overflow: scroll;
   font-size: 11px;
   text-align: left;
 }
 .user-notes {
-  width: 252px;
-  margin-top: 8px;
-  margin-right: 20px;
-  background: aquamarine;
-}
-.details-bottom {
   display: flex;
-  margin-left: 14px;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-top: 6px;
-  margin-right: 12px;
+  height: 55vh;
+  width: 33vw;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
 }
-
-.details-bottom input[type="submit"]{
+.details-bottom input[type="submit"] {
   height: 32px;
   width: 65px;
   margin-left: 14px;
   border-radius: 5px;
+}
+.user-textarea {
+  background-color: #eeee2c;
+  border: 1px solid black;
+  width: 99%;
+  height: 6vw;
+}
+
+.elements {
+  display: flex;
+  overflow: hidden;
+  background-color: rgb(255, 255, 255);
+  height: 33vh;
+  width: 99%;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-end;
 }

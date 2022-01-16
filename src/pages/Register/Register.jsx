@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { API_KEY } from "../../logic";
+import styles from "./Register.module.css";
+import { Link } from "react-router-dom";
 
 export default function Register({ setAuth }) {
   const [email, setEmail] = useState("");
@@ -34,10 +36,11 @@ export default function Register({ setAuth }) {
     }
   }
 
+  const redirectToLogIn = <Link to="/Login">Sign In</Link>;
+
   return (
     <div>
-      <h3>Register Here</h3>
-      <form
+      <form className={styles.registerform}
         onSubmit={(e) => {
           isValidPassword();
           e.preventDefault();
@@ -46,34 +49,34 @@ export default function Register({ setAuth }) {
           e.target[2].value = "";
         }}
       >
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <br />
-        <br />
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <br />
-        <br />
-        <input
-          type="Password"
-          placeholder="Confirm Password"
-          onChange={(e) => {
-            setValidPassword(e.target.value);
-          }}
-        />
-        <br />
-        <br />
-        <input type="submit" value="Register" />
+        <div className={styles.registeruserInputs}>
+          <h2>Sign up</h2>
+          <input
+            type="email"
+            placeholder="Email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <input
+            type="Password"
+            placeholder="Confirm Password"
+            onChange={(e) => {
+              setValidPassword(e.target.value);
+            }}
+          />
+        </div>
+        <div className={styles.registerBtn}>
+          <input type="submit" value="Register" />
+        </div>
+        <p>Already have an acount? {redirectToLogIn}</p>
       </form>
       {wrongPass ? (
         <p style={{ color: "red" }}>password doesn't match</p>

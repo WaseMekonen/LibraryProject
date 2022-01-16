@@ -9,10 +9,7 @@ export default function ReadingList({
   completedList,
   showShortDescription,
 }) {
-  // Star rating:
   const ratingChanged = (bookId, newRating) => {
-    // console.log("bookId", bookId);
-    // console.log("newRating", newRating);
     const readingListCopy = [...readingList];
     readingListCopy.forEach((book) => {
       if (book.id === bookId) {
@@ -20,7 +17,7 @@ export default function ReadingList({
       }
     });
     setReadingList(readingListCopy);
-    console.log('readingListUpdated',readingListCopy)
+    console.log("readingListUpdated", readingListCopy);
     localStorage.setItem("readingList", JSON.stringify(readingListCopy));
   };
 

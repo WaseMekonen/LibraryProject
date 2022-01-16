@@ -3,17 +3,19 @@ import "./Login.css";
 import React from "react";
 import { useState } from "react";
 import { API_KEY } from "../../logic";
+// import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-export default function Login({ setAuth, setUserNotes }) {
+export default function Login({ setAuth }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const emailValid = JSON.parse(localStorage.getItem("email"));
   if (email == emailValid) {
     JSON.parse(localStorage.getItem("completdList"));
     JSON.parse(localStorage.getItem("readingList"));
   }
-
 
   function signIn() {
     const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
@@ -26,13 +28,14 @@ export default function Login({ setAuth, setUserNotes }) {
         setAuth(response.data);
       })
       .catch((err) => {
-        console.log(err);
+        setError(err);
       });
   }
 
+  const redirectToRegister = <Link to="/Register">Register</Link>;
+
   return (
     <div>
-      <h3>User Login</h3>
       <form
         className="login"
         onSubmit={(e) => {
@@ -43,22 +46,18 @@ export default function Login({ setAuth, setUserNotes }) {
         }}
       >
         <div>
-          <h4>Sign In</h4>
+          <h2>Sign In</h2>
         </div>
         <div className="formInputs">
-          <div>
+          <div className="formInputs-input">
             <input
-              className="login-input"
               type="email"
               placeholder="Email"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
-          </div>
-          <div>
             <input
-              className="login-input"
               type="password"
               placeholder="Password"
               onChange={(e) => {
@@ -67,10 +66,21 @@ export default function Login({ setAuth, setUserNotes }) {
             />
           </div>
           <div>
+            {error ? (
+              <p style={{ color: "red" }}>Wrong password! try again</p>
+            ) : (
+              ""
+            )}
+          </div>
+          <div>
             <input className="login-btn" type="submit" value="Log in" />
           </div>
         </div>
-        <div>fotter</div>
+        <div></div>
+
+        <div className="have-acount">
+          Do not have an account? {redirectToRegister}{" "}
+        </div>
       </form>
     </div>
   );

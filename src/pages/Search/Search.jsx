@@ -1,9 +1,9 @@
 import "./Search.css";
 import { useState } from "react";
+import { FaPlusSquare } from "react-icons/fa";
 
 export default function Search({
   books,
-  setBooks,
   showShortDescription,
   readingList,
   setReadingList,
@@ -11,14 +11,12 @@ export default function Search({
   const [userSearchedInput, setUserSearchedInput] = useState("");
   const [searchResult, setSearchResult] = useState([]);
 
- 
-
   const addBookToList = (itemId, array, setArray) => {
     const currentBook = books.find((book) => book.id == itemId);
-    if (array.filter(book=>currentBook.id == book.id).length > 0) {
+    if (array.filter((book) => currentBook.id == book.id).length > 0) {
       alert("book is already exist");
     } else {
-      const newReadingList=[currentBook,...array]
+      const newReadingList = [currentBook, ...array];
       setArray(newReadingList);
     }
   };
@@ -51,37 +49,37 @@ export default function Search({
   }
 
   const elements = books.map((book) => (
-        <div className="book-container" key={book.id}>
-          <div className="book-image">
-            <img src={book.imgUrl} />
+    <div className="book-container" key={book.id}>
+      <div className="book-image">
+        <img src={book.imgUrl} />
+      </div>
+      <div className="book-details">
+        <div className="book-names">
+          <div className="book-title">
+            <h3>{book.title}</h3>
           </div>
-          <div className="book-details">
-            <div className="book-names">
-              <div className="book-title">
-                <h3>{book.title}</h3>
-              </div>
-              <div className="book-author">
-                <h4>{book.author}</h4>
-              </div>
-            </div>
-            <div className="book-description">
-              <div>
-                <h5>{showShortDescription(book.description)}</h5>
-              </div>
-            </div>
-          </div>
-          <div className="book-button">
-            <button
-              onClick={() => {
-                addBookToList(book.id, readingList, setReadingList);
-              }}
-            >
-              Add to Reading List
-            </button>
+          <div className="book-author">
+            <h4>{book.author}</h4>
           </div>
         </div>
-      ))
-    // : null;
+        <div className="book-description">
+          <div>
+            <p>{showShortDescription(book.description)}</p>
+          </div>
+        </div>
+      </div>
+      <div className="book-button">
+        <button
+          onClick={() => {
+            addBookToList(book.id, readingList, setReadingList);
+          }}
+        >
+          Add to Reading List
+        </button>
+      </div>
+    </div>
+  ));
+  // : null;
 
   const searchElements = searchResult.map((book) => (
     <div className="book-container" key={book.id}>
@@ -109,7 +107,7 @@ export default function Search({
             addBookToList(book.id, readingList, setReadingList);
           }}
         >
-          Add to Reading List
+          <FaPlusSquare />
         </button>
       </div>
     </div>
@@ -119,7 +117,6 @@ export default function Search({
 
   return (
     <div>
-      <h2>Library</h2>
       <form
         className="search-form"
         onSubmit={(e) => {

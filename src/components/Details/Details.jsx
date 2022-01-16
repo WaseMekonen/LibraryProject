@@ -29,7 +29,7 @@ export default function Details({ item }) {
   });
 
   const elements = filteredNoteByBookId.map((note, i) => {
-    return <p key={i}>{note.content}</p>;
+    return <li key={i}>{note.content}</li>;
   });
 
   return (
@@ -39,29 +39,31 @@ export default function Details({ item }) {
           <img src={item.imgUrl} />
         </div>
         <div className="details-titles">
-          <h3>{item.title}</h3>
-          <h4>{item.author}</h4>
-          <h5>{item.description}</h5>
-          {/* <h3>{(item.note = tempNote)}</h3> */}
+          <h4>{item.title}</h4>
+          <h5>{item.author}</h5>
+          <p>{item.description}</p>
         </div>
-        <div className="user-notes">{elements}</div>
-      </div>
-      <div className="details-bottom">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            saveUserNote(tempNote, item.id);
-          }}
-        >
-          <textarea
-            cols="50"
-            rows="6"
-            onInput={(e) => {
-              setTempNote(e.target.value);
-            }}
-          ></textarea>
-          <input type="submit" value="save note" />
-        </form>
+        <div className="user-notes">
+          <div className="elements">{elements}</div>
+          <div className="form-div">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                saveUserNote(tempNote, item.id);
+              }}
+            >
+              <textarea
+                className="user-textarea"
+                cols="50"
+                rows="6"
+                onInput={(e) => {
+                  setTempNote(e.target.value);
+                }}
+              ></textarea>
+              <input type="submit" value="save note" />
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
