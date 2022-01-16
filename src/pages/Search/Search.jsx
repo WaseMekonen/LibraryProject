@@ -1,6 +1,6 @@
 import "./Search.css";
 import { useState } from "react";
-import { FaPlusSquare } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 
 export default function Search({
   books,
@@ -59,7 +59,7 @@ export default function Search({
             <h3>{book.title}</h3>
           </div>
           <div className="book-author">
-            <h4>{book.author}</h4>
+            <p>{book.author}</p>
           </div>
         </div>
         <div className="book-description">
@@ -74,7 +74,7 @@ export default function Search({
             addBookToList(book.id, readingList, setReadingList);
           }}
         >
-          Add to Reading List
+          <FaPlus/>
         </button>
       </div>
     </div>

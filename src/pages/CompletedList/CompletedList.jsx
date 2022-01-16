@@ -1,15 +1,7 @@
 import "./CompletedList.css";
+import { FaTimes } from "react-icons/fa";
 
-export default function CompletedList({
-  completedList,
-  setCompletedList,
-  showShortDescription,
-  auth,
-}) {
-  // const userCompletedLocalStorage = JSON.stringify(completedList);
-
-  // localStorage.setItem("completdList", userCompletedLocalStorage);
-
+export default function CompletedList({ completedList, setCompletedList }) {
   const removeBook = (id) => {
     const newCompletedArr = completedList.filter((book) => {
       return book.id !== id;
@@ -34,7 +26,7 @@ export default function CompletedList({
             removeBook(book.id);
           }}
         >
-          Remove
+          <FaTimes/>
         </button>
       </div>
     </div>

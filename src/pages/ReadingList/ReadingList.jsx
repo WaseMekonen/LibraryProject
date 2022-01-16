@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Details from "../../components/Details/Details";
+import './ReadingList.css'
 import ReactStars from "react-rating-stars-component";
+import { FaTrashAlt,FaRegCheckCircle } from "react-icons/fa";
 
 export default function ReadingList({
   readingList,
@@ -50,10 +52,10 @@ export default function ReadingList({
       <div className="book-details">
         <div className="book-names">
           <div className="book-title">
-            <h3>{book.title}</h3>
+            <h4>{book.title}</h4>
           </div>
           <div className="book-author">
-            <h4>{book.author}</h4>
+            <p>{book.author}</p>
           </div>
           <div className="rating">
             <ReactStars
@@ -67,7 +69,7 @@ export default function ReadingList({
         </div>
         <div className="book-description">
           <div>
-            <h5>{showShortDescription(book.description)}</h5>
+            <p>{showShortDescription(book.description)}</p>
           </div>
         </div>
       </div>
@@ -77,7 +79,7 @@ export default function ReadingList({
             removeBook(book.id);
           }}
         >
-          Remove From List
+          <FaTrashAlt/>
         </button>
         <button
           onClick={() => {
@@ -85,7 +87,7 @@ export default function ReadingList({
             removeBook(book.id);
           }}
         >
-          Mark as read
+          <FaRegCheckCircle/>
         </button>
       </div>
     </div>
