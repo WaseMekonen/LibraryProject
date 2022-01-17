@@ -74,7 +74,7 @@ export default function Search({
             addBookToList(book.id, readingList, setReadingList);
           }}
         >
-          <FaPlus/>
+          <FaPlus title="Add to Reading List" />
         </button>
       </div>
     </div>
@@ -92,12 +92,12 @@ export default function Search({
             <h3>{book.title}</h3>
           </div>
           <div className="book-author">
-            <h4>{book.author}</h4>
+            <p>{book.author}</p>
           </div>
         </div>
         <div className="book-description">
           <div>
-            <h5>{showShortDescription(book.description)}</h5>
+            <p>{showShortDescription(book.description)}</p>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ export default function Search({
             addBookToList(book.id, readingList, setReadingList);
           }}
         >
-          <FaPlusSquare />
+          <FaPlus title="Add to Reading List" />
         </button>
       </div>
     </div>

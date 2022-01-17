@@ -77,13 +77,13 @@ function App() {
           <>
             <ul>
               <li>
-                <Link to="/Search">Library</Link>
+                <Link className="library" to="/Search">Library</Link>
               </li>
               <li>
-                <Link to="/ReadingList">Reading List</Link>
+                <Link className="readingList" to="/ReadingList">Reading List</Link>
               </li>
               <li>
-                <Link to="/CompletedList">Completed List</Link>
+                <Link className="completedList" to="/CompletedList">Completed List</Link>
               </li>
               <li>
                 <LogOut setAuth={setAuth} auth={auth} />

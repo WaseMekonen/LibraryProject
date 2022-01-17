@@ -15,10 +15,10 @@
 .App ul {
   position: fixed;
   top: 0%;
-  height: 45px;
+  height: 10%;
   list-style-type: none;
   width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
   background-color: #ffffff;
   border-bottom: 1px solid #bbbbbb;
 }
@@ -35,6 +35,29 @@ li a {
   text-decoration: none;
 }
 
+li .library {
+  border-bottom: none;
+}
+
+li .library:hover {
+  border-bottom: 3px solid red;
+}
+
+li .readingList {
+  border-bottom: none;
+}
+
+li .readingList:hover {
+  border-bottom: 3px solid rgb(255, 187, 0);
+}
+
+li .completedList {
+  border-bottom: none;
+}
+
+li .completedList:hover {
+  border-bottom: 3px solid rgb(19, 239, 255);
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
