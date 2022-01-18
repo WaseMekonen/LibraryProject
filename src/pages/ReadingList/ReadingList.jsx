@@ -11,6 +11,8 @@ export default function ReadingList({
   completedList,
   showShortDescription,
 }) {
+
+  
   const ratingChanged = (bookId, newRating) => {
     const readingListCopy = [...readingList];
     readingListCopy.forEach((book) => {

@@ -7,7 +7,7 @@ export default function Home() {
       <ul></ul>
         <div className="home-titles">
           <h2>Welcome </h2>
-          <h4>Login To Discover The Secret Of Library</h4>
+          <h4>Login to discover the secret of library</h4>
         </div>
       </div>
       <div className="buttons-container">

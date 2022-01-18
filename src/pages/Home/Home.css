@@ -1,5 +1,5 @@
 .banner ul {
-  background-color: #292828c9;
+  background-color: #ffffffc9;
   margin-bottom: 0;
   height: 45px;
   width: 100vw;
@@ -25,12 +25,13 @@
   font-size: 45px;
   font-family: -webkit-body;
   color: white;
+  margin-bottom: 38px;
 }
 
 .home-titles h4 {
   font-size: 23px;
   color: white;
-  font-family: cursive;
+  font-family: emoji;
 }
 
 .buttons-container {
